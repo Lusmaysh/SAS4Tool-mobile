@@ -6,19 +6,31 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "17"
+
+      - name: Create Base Settings File
+        run: |
+          if [ ! -f "settings.gradle.kts" ] && [ ! -f "settings.gradle" ]; then
+            echo 'rootProject.name = "SAS4Tool-Mobile"' > settings.gradle.kts
+            echo 'include(":app")' >> settings.gradle.kts
+          fi
+
       - name: Generate Wrapper
         run: |
           gradle wrapper --gradle-version 8.6
+
       - name: Commit Wrapper Files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add gradle/ gradlew gradlew.bat
-          git commit -m "chore: initialize gradle wrapper" || echo "No changes"
+          git add gradle/ gradlew gradlew.bat settings.gradle.kts
+          git commit -m "chore: initialize gradle wrapper and settings" || echo "No changes"
           git push
