@@ -1,0 +1,5 @@
+backups/
+exports/
+lib/__pycache__
+config.json
+items.json
