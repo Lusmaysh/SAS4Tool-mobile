@@ -5,23 +5,18 @@ from lib.account import (
     _removeAdsLogic,
     _unlockWeaponCollectionLogic,
     _unlockArmorCollectionLogic,
-    _toggleCollectionRewardsLogic,)
+    _toggleCollectionRewardsLogic,
+)
 from lib.utilities import (
     loadSave,
     writeSave,
     loadConfig,
-    nestedMenuOptions,
-    menuOptions,
-    directFunction,
-    promptInt,
-    promptStr,
     getProfiles,
     loadItems
 )
 from random import randint
 import numpy as np
 from functools import partial
-
 # ==========================================
 # 1. LOGIC FUNCTIONS (Memory only, without I/O)
 # ==========================================

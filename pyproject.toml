@@ -1,0 +1,15 @@
+[project]
+name = "sas4tool"
+version = "1.0.0"
+description = "SAS4 Mobile Save Editor"
+dependencies = [
+    "flet",
+    "numpy"
+]
+
+[tool.flet]
+org = "com.modtool"
+product = "SAS4 Tool"
+
+[tool.flet.android]
+package = "com.modtool.sas4"
