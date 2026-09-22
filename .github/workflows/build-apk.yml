@@ -2,7 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [main, master, flet]
+    branches: [flet]
   workflow_dispatch:
 
 jobs:
@@ -19,14 +19,9 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-
       - name: Accept Android SDK Licenses
         run: |
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,7 +35,7 @@ jobs:
 
       - name: Build APK via Flet CLI
         run: |
-          flet build apk --project "SAS4Tool" --org "com.modtool.sas4"
+          flet build apk --project "SAS4Tool" --org "com.modtool.sas4" --yes -vv
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
